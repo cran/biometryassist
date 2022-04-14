@@ -1,17 +1,14 @@
-#' @importFrom ggplot2 autoplot
-#' @rdname autoplot
-#' @export
-ggplot2::autoplot
-
 #' Automatic plots for objects generated in biometryassist
 #'
 #' @param object An object to create a plot for. Currently objects from the [multiple_comparisons()] or [design()] functions with class "mct" or "design" respectively are supported.
 #' @param label_height Height of the text labels above the upper error bar on the plot. Default is 0.1 (10%) of the difference between upper and lower error bars above the top error bar.
-#' @param rotation Rotate the text output as Treatments within the plot. Allows for easier reading of long treatment labels. Number between 0 and 360 (inclusive) - default 0
 #' @param size Increase or decrease the text size within the plot for treatment labels. Numeric with default value of 4.
+#' @param rotation Rotate the x axis labels and the treatment group labels within the plot. Allows for easier reading of long axis or treatment labels. Number between 0 and 360 (inclusive) - default 0
+#' @param axis_rotation Enables rotation of the x axis independently of the group labels within the plot.
+#' @param label_rotation Enables rotation of the treatment group labels independently of the x axis labels within the plot.
 #' @param margin Logical (default `FALSE`). A value of `FALSE` will expand the plot to the edges of the plotting area i.e. remove white space between plot and axes.
 #' @param palette A string specifying the colour scheme to use for plotting. Default is equivalent to "Spectral". Colour blind friendly palettes can also be provided via options `"colour blind"` (or `"color blind"`, both equivalent to `"viridis"`), `"magma"`, `"inferno"`, `"plasma"` or `"cividis"`. Other palettes from [scales::brewer_pal()] are also possible.
-#' @param ... Other arguments to be passed through.
+#' @inheritParams rlang::args_dots_used
 #'
 #' @name autoplot
 #'
@@ -19,6 +16,11 @@ ggplot2::autoplot
 #' @seealso [multiple_comparisons()] and [design()]
 #'
 NULL
+
+#' @importFrom ggplot2 autoplot
+#' @rdname autoplot
+#' @export
+ggplot2::autoplot
 
 
 #' @rdname autoplot
@@ -28,7 +30,7 @@ NULL
 #' dat.aov <- aov(Petal.Width ~ Species, data = iris)
 #' output <- multiple_comparisons(dat.aov, classify = "Species")
 #' autoplot(output, label_height = 0.5)
-autoplot.mct <- function(object, rotation = 0, size = 4, label_height = 0.1, ...) {
+autoplot.mct <- function(object, size = 4, label_height = 0.1, rotation = 0, axis_rotation = rotation, label_rotation = rotation, ...) {
     stopifnot(inherits(object, "mct"))
 
     # classify is just the first n columns (before predicted.value)
@@ -118,7 +120,7 @@ autoplot.design <- function(object, rotation = 0, size = 4, margin = FALSE, pale
         stop("Invalid value for palette.")
     }
 
-    if (!any(grepl("block", names(object)))) {
+    if(!any(grepl("block", names(object)))) {
         # create the graph
         plt <- ggplot2::ggplot() +
             ggplot2::geom_tile(data = object, mapping = ggplot2::aes(x = col, y = row, fill = treatments), colour = "black") +
@@ -158,7 +160,7 @@ autoplot.design <- function(object, rotation = 0, size = 4, margin = FALSE, pale
 
     plt <- plt + scale_fill_manual(values = colour_palette, name = "Treatment")
 
-    if (!margin) {
+    if(!margin) {
         plt <- plt + ggplot2::scale_x_continuous(expand = c(0, 0), breaks = seq(1, max(object$col), 1)) + ggplot2::scale_y_continuous(expand = c(0, 0), trans = scales::reverse_trans(), breaks = seq(1, max(object$row), 1))
     }
     else {
@@ -167,4 +169,6 @@ autoplot.design <- function(object, rotation = 0, size = 4, margin = FALSE, pale
 
     return(plt)
 }
+
+
 
