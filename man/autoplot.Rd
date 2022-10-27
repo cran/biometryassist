@@ -24,6 +24,8 @@
   size = 4,
   margin = FALSE,
   palette = "default",
+  row = NULL,
+  col = NULL,
   ...
 )
 }
@@ -32,7 +34,7 @@
 
 \item{size}{Increase or decrease the text size within the plot for treatment labels. Numeric with default value of 4.}
 
-\item{label_height}{Height of the text labels above the upper error bar on the plot. Default is 0.1 (10\%) of the difference between upper and lower error bars above the top error bar.}
+\item{label_height}{Height of the text labels above the upper error bar on the plot. Default is 0.1 (10\%) of the difference between upper and lower error bars above the top error bar. Values > 1 are interpreted as the actual value above the upper error bar.}
 
 \item{rotation}{Rotate the x axis labels and the treatment group labels within the plot. Allows for easier reading of long axis or treatment labels. Number between 0 and 360 (inclusive) - default 0}
 
