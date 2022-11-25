@@ -1,7 +1,7 @@
 Type: Package
 Package: biometryassist
 Title: Functions to Assist Design and Analysis of Agronomic Experiments
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: 
     c(person(given = "Sharon",
              family = "Nielsen",
@@ -43,9 +43,9 @@ Enhances: asreml, ARTool, lme4, nlme, sommer
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.2
 NeedsCompilation: no
-Packaged: 2022-10-27 10:44:18 UTC; sam
+Packaged: 2022-11-25 08:07:17 UTC; sam
 Author: Sharon Nielsen [aut],
   Sam Rogers [aut, cre],
   Annie Conway [aut],
@@ -54,4 +54,4 @@ Author: Sharon Nielsen [aut],
     (https://grdc.com.au/)
 Maintainer: Sam Rogers <biometrytraining@adelaide.edu.au>
 Repository: CRAN
-Date/Publication: 2022-10-27 15:05:18 UTC
+Date/Publication: 2022-11-25 12:00:02 UTC
