@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Installing ASReml-R</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Installing ASReml-R</h1>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#note-licencing-asreml-r" id="toc-note-licencing-asreml-r">Note: Licencing ASReml-R</a>
+<ul>
+<li><a href="#licence" id="toc-licence">Licence key for University of
+Adelaide Staff and Students</a></li>
+</ul></li>
+<li><a href="#package-method" id="toc-package-method">Package
+method</a></li>
+<li><a href="#function-only-method" id="toc-function-only-method">Function Only Method</a></li>
+<li><a href="#installing-asreml-r" id="toc-installing-asreml-r">Installing ASReml-R</a></li>
+<li><a href="#activating-asreml-r" id="toc-activating-asreml-r">Activating ASReml-R</a></li>
+<li><a href="#additional-installation-options" id="toc-additional-installation-options">Additional Installation
+Options</a></li>
+<li><a href="#where-to-get-help" id="toc-where-to-get-help">Where To Get
+Help</a></li>
+</ul>
+</div>
+
+<details>
+<summary style="font-size: 125%; font-weight: 700;">
+Quick Version
+</summary>
+<p>Run the following code to install and licence ASReml-R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;biometryassist&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>biometryassist<span class="sc">::</span><span class="fu">install_asreml</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>asreml<span class="sc">::</span><span class="fu">asreml.license.activate</span>()</span></code></pre></div>
+<p>Then paste your <a href="#licence">licence code</a> at the
+prompt.</p>
+</details>
+<div id="note-licencing-asreml-r" class="section level2">
+<h2>Note: Licencing ASReml-R</h2>
+<p>ASReml-R is a proprietary R package which is sold and supported by <a href="https://vsni.co.uk/">VSN International</a>, and requires a licence
+code to activate and run. This licence code is checked for validity via
+the internet, and may require opening some network ports on your
+computer to successfully activate. Further information about the licence
+requirements can be obtained from <a href="https://vsni.co.uk/licensing">VSNi directly</a>.</p>
+<p>The developers of biometryassist do not provide support for
+<code>ASReml-R</code> via way of bug reports or software patches, and
+any problems with the ASReml-R software should be directed to <a href="https://vsni.co.uk/">VSN International</a>. These installation
+instructions are provided on a best-effort basis and any problems with
+the steps in this <em>installation guide</em> should be reported to the
+<a href="https://github.com/biometryhub/biometryassist/issues/new">developers
+of biometryassist</a>.</p>
+<div id="licence" class="section level3">
+<h3>Licence key for University of Adelaide Staff and Students</h3>
+<p>As of June 2023, the University of Adelaide has unlimited licence
+codes until June 2026 for university staff, students and affiliates,
+thanks to funding provided by the Grains Research and Development
+Corporation, via the Analytics for the Australian Grains Industry (AAGI)
+project.</p>
+<p>To access the University of Adelaide licence key, please complete
+this form: <a href="https://forms.office.com/r/gBva4iL3FU" class="uri">https://forms.office.com/r/gBva4iL3FU</a></p>
+<p>You will receive an email with a licence key if you hold a valid
+University of Adelaide account.</p>
+</div>
+</div>
+<div id="package-method" class="section level2">
+<h2>Package method</h2>
+<p>The easiest way to install ASReml-R is to use the
+<code>biometryassist</code> package, which includes an automated
+<code>install_asreml()</code> function. This function will detect the
+appropriate version of R and your operating system, and download the
+matching version of asreml. If you’d rather not install the full package
+for this one function, you can simply source the function from the
+public GitHub repository instead, and run the function. See <a href="#function-only-method">Function Only Method</a>.</p>
+<p>The <code>biometryassist</code> package is on CRAN, so can be
+installed using the regular method:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;biometryassist&quot;</span>)</span></code></pre></div>
+<p>Once installed, load the package ready for use with:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(biometryassist)</span></code></pre></div>
+<p>This package will stay installed between R sessions, but will need to
+be loaded with the library command any time you want to use the
+functions within it.</p>
+</div>
+<div id="function-only-method" class="section level2">
+<h2>Function Only Method</h2>
+<p>To use only the function, without the additional overhead of the
+biometryassist package, source it with the following command:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(rlang) <span class="sc">|</span> <span class="sc">!</span><span class="fu">require</span>(curl)) <span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;rlang&quot;</span>, <span class="st">&quot;curl&quot;</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/biometryhub/biometryassist/main/R/install_asreml.R&quot;</span>)</span></code></pre></div>
+<p>This will enable use of the function within the current R session. If
+you close R, you will need to run the line above again to enable use of
+the function. Note this requires the packages <code>rlang</code> and
+<code>curl</code> to be installed, which is accomplished in the first
+line above if necessary.</p>
+</div>
+<div id="installing-asreml-r" class="section level2">
+<h2>Installing ASReml-R</h2>
+<p>Once the install function is available, simply run it and wait for it
+to finish:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">install_asreml</span>()</span></code></pre></div>
+<p>The following output is typical:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install_asreml</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>Downloading and installing ASReml<span class="sc">-</span>R. This may take some time, depending on internet speed...</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="sc">*</span> installing <span class="sc">*</span>source<span class="sc">*</span> package ‘asreml’ ...</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="sc">**</span> using staged installation</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="sc">**</span> R</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="sc">**</span> data</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="sc">**</span><span class="er">*</span> moving datasets to lazyload DB</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="sc">**</span> inst</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="sc">**</span> byte<span class="sc">-</span>compile and prepare package <span class="cf">for</span> lazy loading</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="sc">**</span> help</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="sc">**</span><span class="er">*</span> installing help indices</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="sc">**</span> building package indices</span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="sc">**</span> testing <span class="cf">if</span> installed package can be loaded from temporary location</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="sc">**</span> checking absolute paths <span class="cf">in</span> shared objects and dynamic libraries</span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="sc">**</span> testing <span class="cf">if</span> installed package can be loaded from final location</span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="sc">**</span> testing <span class="cf">if</span> installed package keeps a record of temporary installation path</span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="sc">*</span> <span class="fu">DONE</span> (asreml)</span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>ASReml<span class="sc">-</span>R successfully installed<span class="sc">!</span></span></code></pre></div>
+</div>
+<div id="activating-asreml-r" class="section level2">
+<h2>Activating ASReml-R</h2>
+<p>To activate the licence code once asreml is installed, run the
+following commands (noting the spelling of
+licen<strong>s</strong>e):</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">library</span>(asreml)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">asreml.license.activate</span>()</span></code></pre></div>
+<p>You will then be prompted to provide a licence code, which is a 16
+character alpha-numeric code:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">asreml.license.activate</span>()</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>Please enter your activation <span class="fu">code</span> (RET or <span class="dv">0</span> to exit)<span class="sc">:</span> AAA1<span class="sc">-</span>BBB2<span class="sc">-</span>CCC3<span class="sc">-</span>DDD4</span></code></pre></div>
+<p>A valid licence code will produce the following output:</p>
+<pre><code>License activation successful
+Licensed to &lt;Orginisation or name&gt; - &lt;reference code(s)&gt;
+Ref: &lt;reference code&gt; Expires: &lt;expiry date&gt;, &lt;n&gt; days.</code></pre>
+</div>
+<div id="additional-installation-options" class="section level2">
+<h2>Additional Installation Options</h2>
+<p>The <code>install_asreml()</code> function has a number of additional
+arguments, which you can read about <a href="https://biometryhub.github.io/biometryassist/reference/install_asreml.html">on
+the documentation site</a>.</p>
+<p>If you already have ASReml-R installed, and want to update it or
+reinstall it, you can use the <code>update_asreml()</code> function, or
+<code>install_asreml(force = TRUE)</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">update_asreml</span>()</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">install_asreml</span>(<span class="at">force =</span> <span class="cn">TRUE</span>) <span class="co"># Equivalent to the above</span></span></code></pre></div>
+</div>
+<div id="where-to-get-help" class="section level2">
+<h2>Where To Get Help</h2>
+<ul>
+<li>For errors or problems encountered following these instructions, or
+problems using <a href="https://biometryhub.github.io/biometryassist/reference/index.html">functions
+in biometryassist</a> with ASReml-R, contact the <a href="https://github.com/biometryhub/biometryassist/issues/new">developers
+of biometryassist</a></li>
+<li>For problems with licence activation, or for errors encountered
+using a successfully installed and licenced ASReml-R package, or for
+questions about how to use the ASReml-R package, <a href="https://vsni.co.uk/contact-us">contact VSNi</a>.</li>
+</ul>
+<hr />
+<p>This vignette was last updated on 2023-07-03.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

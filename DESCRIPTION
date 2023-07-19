@@ -1,7 +1,7 @@
 Type: Package
 Package: biometryassist
 Title: Functions to Assist Design and Analysis of Agronomic Experiments
-Version: 1.1.2
+Version: 1.1.3
 Authors@R: 
     c(person(given = "Sharon",
              family = "Nielsen",
@@ -35,17 +35,18 @@ License: MIT + file LICENSE
 URL: https://biometryhub.github.io/biometryassist/
 BugReports: https://github.com/biometryhub/biometryassist/issues
 Depends: R (>= 4.0.0)
-Imports: agricolae, cowplot, curl, farver, ggplot2, lattice,
-        multcompView, pracma, predictmeans, rlang (>= 1.0.0), scales,
-        stringi, withr
-Suggests: covr, crayon, getPass, mockery, testthat, vdiffr
+Imports: agricolae, cowplot, curl, emmeans, farver, ggplot2, lattice,
+        multcompView, pracma, rlang (>= 1.0.0), scales, stringi
+Suggests: covr, crayon, getPass, knitr, mockery, rmarkdown, testthat,
+        vdiffr, withr
 Enhances: asreml, ARTool, lme4, nlme, sommer
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
+VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2022-11-25 08:07:17 UTC; sam
+Packaged: 2023-07-19 05:07:13 UTC; holly
 Author: Sharon Nielsen [aut],
   Sam Rogers [aut, cre],
   Annie Conway [aut],
@@ -54,4 +55,4 @@ Author: Sharon Nielsen [aut],
     (https://grdc.com.au/)
 Maintainer: Sam Rogers <biometrytraining@adelaide.edu.au>
 Repository: CRAN
-Date/Publication: 2022-11-25 12:00:02 UTC
+Date/Publication: 2023-07-19 08:50:02 UTC
