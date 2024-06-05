@@ -1,7 +1,7 @@
 Type: Package
 Package: biometryassist
 Title: Functions to Assist Design and Analysis of Agronomic Experiments
-Version: 1.2.0
+Version: 1.2.1
 Authors@R: 
     c(person(given = "Sharon",
              family = "Nielsen",
@@ -46,7 +46,7 @@ Encoding: UTF-8
 RoxygenNote: 7.3.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2024-05-31 09:46:18 UTC; holly
+Packaged: 2024-06-04 09:02:09 UTC; holly
 Author: Sharon Nielsen [aut],
   Sam Rogers [aut, cre],
   Annie Conway [aut],
@@ -55,4 +55,4 @@ Author: Sharon Nielsen [aut],
     (https://grdc.com.au/)
 Maintainer: Sam Rogers <biometrytraining@adelaide.edu.au>
 Repository: CRAN
-Date/Publication: 2024-05-31 13:30:22 UTC
+Date/Publication: 2024-06-05 15:50:02 UTC
