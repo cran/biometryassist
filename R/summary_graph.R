@@ -11,7 +11,7 @@
 #' @importFrom ggplot2 ggplot aes geom_boxplot stat_summary facet_wrap geom_point labs theme_bw
 #' @importFrom rlang ensym ensyms as_string
 #'
-#' @return A ggplot2 plot object
+#' @returns A ggplot2 plot object
 #' @export
 #'
 #' @details
@@ -25,10 +25,10 @@
 #'
 #' summary_graph(iris, "Petal.Length", "Species", "mm")
 #'
-#' # Multiple
+#' # Multiple explanatory variables can be provided as a vector
 #' summary_graph(npk, "yield", c("N", "P"), "lb/plot")
 #'
-#  # Three way interaction
+#  # Three way interaction of explanatory variables
 #' summary_graph(npk, "yield", c("N", "P", "K"), "lb/plot")
 #'
 summary_graph <- function(data, response, exp_var, resp_units = "") {
